@@ -24,3 +24,5 @@ document.addEventListener("turbolinks:load", () => {
     return new bootstrap.Popover(popoverTriggerEl)
   })
 })
+
+import "controllers"
