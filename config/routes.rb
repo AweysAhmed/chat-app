@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+# require 'sidekiq/web'
 
 Rails.application.routes.draw do
   resources :channels do
@@ -7,23 +7,19 @@ Rails.application.routes.draw do
   end
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
-authenticate :user, lambda { |u| u.admin? } do
-  mount Sidekiq::Web => '/sidekiq'
+# authenticate :user, lambda { |u| u.admin? } do
+#   mount Sidekiq::Web => '/sidekiq'
 
-  namespace :madmin do
-    resources :announcements
-    resources :notifications
-    resources :services
-    namespace :active_storage do
-      resources :blobs
-    end
-    namespace :active_storage do
-      resources :attachments
-    end
-    resources :users
-    root to: "dashboard#show"
-  end
-end
+#   namespace :madmin do
+#     namespace :active_storage do
+#       resources :blobs
+#     end
+#     namespace :active_storage do
+#       resources :attachments
+#     end
+#     resources :users
+#   end
+# end
 
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]

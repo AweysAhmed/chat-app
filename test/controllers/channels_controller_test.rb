@@ -2,7 +2,14 @@ require 'test_helper'
 
 class ChannelsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @channel = channels(:one)
+    sign_in users(:aweys)
+    @channel = channels(:channel_one)
+  end
+
+  test "should redirect when not logged in" do
+    sign_out :user
+    get channels_url
+    assert_redirected_to new_user_session_url
   end
 
   test "should get index" do
